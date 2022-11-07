@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Vue 3 Simple Slider - Mandalorian </title>
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
+    integrity='sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=='
+    crossorigin='anonymous' referrerpolicy='no-referrer' />
+
+  <link href='./assets/css/style.css' rel='stylesheet'>
+</head>
+
+<body>
+
+  <div id='app'>
+    <h1 class="title">{{movie.title}}</h1>
+
+    <div class="container">
+      <div class="card movie">
+        <!-- viene stampata l'immagine con indice activeImage -->
+        <img :src="movie.images[activeImage]" :alt="'Poster' + movie.title">
+
+        <div class="thumbnails">
+          <!-- ciclo tutte le immagini -->
+          <!-- devo ciclare anche l'indice perché mi serve per
+            - stampare la classe active
+            - avere l'indice della thumb cliccata da passare a changeImage(indice)
+          -->
+          <!-- se l'indice è uguale ad activeImage stampo la classe active -->
+          <img
+            v-for="(image, indice) in movie.images"
+            :src="image" 
+            class="thumb" 
+            @click="changeImage(indice)"
+            :class="{'active': indice === activeImage}">
+        </div>
+
+        <div class="navigator">
+          <div class="prev" 
+            @click="nextPrev(false)">
+            <i class="fa-solid fa-chevron-left"></i>
+          </div>
+          <div class="next"
+            @click="nextPrev(true)" >
+            <i class="fa-solid fa-chevron-right">
+            </i>
+          </div>
+        </div>
+        <div class="details">
+          <h3 class="title">{{movie.title}}</h3>
+          <div>Category: {{movie.category}}</div>
+          <small>Lenght: {{movie.lenght}}</small>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src='./assets/js/app.js'></script>
+</body>
+
+</html>
